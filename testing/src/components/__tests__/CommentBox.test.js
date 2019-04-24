@@ -24,3 +24,13 @@ it("has a text area that users can type in", () => {
   wrapped.update();
   expect(wrapped.find("textarea").prop("value")).toEqual("new comment");
 });
+
+it("input clears upon form submission", () => {
+  wrapped.find("textarea").simulate("change", {
+    target: { name: "comment", value: "new comment" }
+  });
+  wrapped.update();
+  wrapped.find("form").simulate("submit");
+  wrapped.update();
+  expect(wrapped.find("textarea").prop("value")).toEqual("");
+});
